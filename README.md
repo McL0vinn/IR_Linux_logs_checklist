@@ -1,4 +1,4 @@
-
+```
 Unlike in Windows, Linux logs most events into plain text files.
 This means you can read the logs via any text editor without the need for specialized tools like Event Viewer.
 On the other hand, default Linux logs are less structured as there are no event codes and strict log formatting rules. 
@@ -100,6 +100,8 @@ bash history — ~/.bash_history
 SSH keys — ~/.ssh/
 systemd unit files — /etc/systemd/system/
 crontab — /etc/crontab, /var/spool/cron/
+
+```
 
 tmp directories — /tmp, /var/tmp
 
