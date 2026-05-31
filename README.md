@@ -102,8 +102,17 @@ Container breakout attempts, malicious containers.
 7) High‑Value IR Artifacts (not logs but mandatory)
 
 bash history — ~/.bash_history
+
 (By default, commands are first stored in memory during your session, and then written to the per-user ~/.bash_history file when you log out.
 You can open the ~/.bash_history file to review commands from previous sessions or use the history command to view commands from both your current and past sessions)
+# Attackers can simply add a leading space to the command to avoid being logged
+ubuntu@thm-vm:~$  echo "huehuehue"
+# Attackers can paste their commands in a script to hide them from Bash history
+ubuntu@thm-vm:~$ nano legit.sh && ./legit.sh
+# Attackers can use other shells like /bin/sh that don't save the history like Bash
+ubuntu@thm-vm:~$ sh
+$ echo "I am no longer tracked by Bash!"
+
 SSH keys — ~/.ssh/
 systemd unit files — /etc/systemd/system/
 crontab — /etc/crontab, /var/spool/cron/
