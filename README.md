@@ -6,7 +6,8 @@ Use commands such as grep,tail,head to make your life easier
 e.g $ cat /var/log/syslog | grep CRON
 
 let's say you hunt for all user logins, but don't know where to look for them.
-Linux system logs are stored in the /var/log/ folder in plain text, so you can simply grep for related keywords like "login", "auth", or "session" in all log files there and narrow down your next searches:
+Linux system logs are stored in the /var/log/ folder in plain text, so you can simply
+grep for related keywords like "login", "auth", or "session" in all log files there and narrow down your next searches:
 $ grep -R -E "auth|login|session" /var/log
 
 
