@@ -120,13 +120,34 @@ tmp directories — /tmp, /var/tmp
 user home dirs — /home/*
 ```
 
-
+```
 
 Linux doesn't log process creation, file changes, or network-related events, collectively known as runtime events. Interestingly, Windows faces the same limitation, which is why in Wibdows we had to use an additional tool: Sysmon.
-However in Linux we have system calls which can assist. In short, whenever you need to open a file, create a process, access the camera, or request any other OS service, you make a specific system call. There are over 300 (https://man7.org/linux/man-pages/man2/syscalls.2.html)  system calls in Linux, like execve to execute a program.
+However in Linux we have system calls which can assist. In short, whenever you need to open a file, create a process, access the camera, or request any other OS service, you make a specific system call. There are over 300 (https://man7.org/linux/man-pages/man2/syscalls.2.html)  system calls in Linux, like execve to execute a program.instructions located in /etc/audit/rules.d/ that define which system calls to monitor and which filters to apply:
+
+<img width="1160" height="268" alt="image" src="https://github.com/user-attachments/assets/53467dbc-3904-4704-bc18-43d96b10f55d" />
+
 
 Audit Daemon
 Auditd (Audit Daemon) is a built-in auditing solution often used by the SOC team for runtime monitoring.
-instructions located in /etc/audit/rules.d/ that define which system calls to monitor and which filters to apply:
+You can view the generated logs in real time in /var/log/audit/audit.log, but it is easier to use the ausearch command, as it formats the output for better readability and supports filtering options. Let's see an example based on the rules from the example above by searching events matching the "proc_wget" key:
+
+root@thm-vm:~$ ausearch -i -k proc_wget
+----
+type=PROCTITLE msg=audit(08/12/25 12:48:19.093:2219) : proctitle=wget https://files.tryhackme.thm/report.zip
+type=CWD msg=audit(08/12/25 12:48:19.093:2219) : cwd=/root
+type=EXECVE msg=audit(08/12/25 12:48:19.093:2219) : argc=2 a0=wget a1=https://files.tryhackme.thm/report.zip
+type=SYSCALL msg=audit(08/12/25 12:48:19.093:2219) : arch=x86_64 syscall=execve [...] ppid=3752 pid=3888 auid=ubuntu uid=root tty=pts1 exe=/usr/bin/wget key=proc_wget
+
+The terminal above shows a log of a single "wget" command. Here, auditd splits the event into four lines: the PROCTITLE shows the process command line, CWD reports the current working directory, and the remaining two lines show the system call details, like:
+
+pid=3888, ppid=3752: Process ID and Parent Process ID. Helpful in linking events and building a process tree
+auid=ubuntu: Audit user. The account originally used to log in, whether locally (keyboard) or remotely (SSH)
+uid=root: The user who ran the command. The field can differ from auid if you switched users with sudo or su
+tty=pts1: Session identifier. Helps distinguish events when multiple people work on the same Linux server
+exe=/usr/bin/wget: Absolute path to the executed binary, often used to build SOC detection rules
+key=proc_wget: Optional tag specified by engineers in auditd rules that is useful to filter the events
+
+```
 
 <img width="1156" height="274" alt="image" src="https://github.com/user-attachments/assets/1837f75b-5433-4021-a457-7cd09f673f54" />
