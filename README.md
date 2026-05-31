@@ -6,6 +6,8 @@ Use commands such as grep,tail,head to make your life easier
 e.g $ cat /var/log/syslog | grep CRON
 $ cat /var/log/auth.log | grep -E 'session opened|session closed'
 $ cat /var/log/auth.log | grep "sshd" | grep -E 'Accepted|Failed'
+$ cat /var/log/auth.log | grep -E '(passwd|useradd|usermod|userdel)\['
+$ cat /var/log/auth.log | grep -E 'COMMAND='
 
 let's say you hunt for all user logins, but don't know where to look for them.
 Linux system logs are stored in the /var/log/ folder in plain text, so you can simply
