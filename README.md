@@ -107,9 +107,6 @@ You can open the ~/.bash_history file to review commands from previous sessions 
 SSH keys — ~/.ssh/
 systemd unit files — /etc/systemd/system/
 crontab — /etc/crontab, /var/spool/cron/
-
-```
-
 tmp directories — /tmp, /var/tmp
-
 user home dirs — /home/*
+```
