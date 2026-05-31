@@ -4,6 +4,7 @@ This means you can read the logs via any text editor without the need for specia
 On the other hand, default Linux logs are less structured as there are no event codes and strict log formatting rules. 
 Use commands such as grep,tail,head to make your life easier
 e.g $ cat /var/log/syslog | grep CRON
+$ cat /var/log/auth.log | grep -E 'session opened|session closed'
 
 let's say you hunt for all user logins, but don't know where to look for them.
 Linux system logs are stored in the /var/log/ folder in plain text, so you can simply
