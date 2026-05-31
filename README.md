@@ -25,6 +25,7 @@ messages — /var/log/messages (RHEL/CentOS equivalent of syslog)
 Kernel, services, hardware, boot, general system activity.
 
 2) Authentication, Accounts & Privilege
+
 faillog — /var/log/faillog  
 Failed login attempts (binary file; use faillog -a).
 
@@ -41,6 +42,7 @@ sudo logs — /var/log/auth.log or /var/log/secure
 Sudo invocations, failures, escalation attempts.
 
 3) Process, Services & Persistence
+
 daemon.log — /var/log/daemon.log  
 Background services, suspicious daemons, malware persistence.
 
@@ -54,6 +56,7 @@ boot.log — /var/log/boot.log
 Boot‑time anomalies, injected services.
 
 4) Network & Firewall
+
 kern.log — /var/log/kern.log  
 Kernel‑level networking, dropped packets, suspicious modules.
 
@@ -67,6 +70,7 @@ dmesg — kernel ring buffer
 Rootkits, module loading, hardware manipulation.
 
 5) Package, Updates & Integrity
+
 dpkg.log — /var/log/dpkg.log  
 Installed/removed packages (malicious installs).
 
@@ -77,6 +81,7 @@ yum.log — /var/log/yum.log
 RPM‑based package operations.
 
 6) Application‑Specific Logs
+
 Apache logs — /var/log/apache2/  
 Access logs, exploitation attempts, webshell indicators.
 
@@ -90,12 +95,10 @@ Docker logs — /var/lib/docker/containers/<id>/<id>-json.log
 Container breakout attempts, malicious containers.
 
 7) High‑Value IR Artifacts (not logs but mandatory)
+
 bash history — ~/.bash_history
-
 SSH keys — ~/.ssh/
-
 systemd unit files — /etc/systemd/system/
-
 crontab — /etc/crontab, /var/spool/cron/
 
 tmp directories — /tmp, /var/tmp
