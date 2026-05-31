@@ -119,3 +119,14 @@ crontab — /etc/crontab, /var/spool/cron/
 tmp directories — /tmp, /var/tmp
 user home dirs — /home/*
 ```
+
+
+
+Linux doesn't log process creation, file changes, or network-related events, collectively known as runtime events. Interestingly, Windows faces the same limitation, which is why in Wibdows we had to use an additional tool: Sysmon.
+However in Linux we have system calls which can assist. In short, whenever you need to open a file, create a process, access the camera, or request any other OS service, you make a specific system call. There are over 300 (https://man7.org/linux/man-pages/man2/syscalls.2.html)  system calls in Linux, like execve to execute a program.
+
+Audit Daemon
+Auditd (Audit Daemon) is a built-in auditing solution often used by the SOC team for runtime monitoring.
+instructions located in /etc/audit/rules.d/ that define which system calls to monitor and which filters to apply:
+
+<img width="1156" height="274" alt="image" src="https://github.com/user-attachments/assets/1837f75b-5433-4021-a457-7cd09f673f54" />
